@@ -1,13 +1,13 @@
 import mongoose , {Schema , Document} from "mongoose";
 
 
-export interface Massageinterface extends Document{
+export interface Messageinterface extends Document{
        content : string;
        createdAt : Date;
 };
 
 
-const massageSchema : Schema<Massageinterface> = new Schema({
+const messageSchema : Schema<Messageinterface> = new Schema({
 
      content : {
         type : String,
@@ -32,7 +32,7 @@ export interface Userinterface extends Document{
     isverifyfied : boolean;
     verifycodeExpiry : Date;
     isAcceptingMassage : boolean;
-    massages : Massageinterface[]
+    messages : Messageinterface[]
 }
 
 
@@ -73,7 +73,7 @@ const userSchema : Schema<Userinterface> = new Schema({
         type : Boolean,
         defult : true
     },
-    massages : [massageSchema]
+    messages : [messageSchema]
 
 })
 
