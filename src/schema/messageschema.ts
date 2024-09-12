@@ -7,3 +7,4 @@ export const messageSchema = z.object({
    .max(300 , { message : " message content not longer than 300 char"})
 
 })
+
