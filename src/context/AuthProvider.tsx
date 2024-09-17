@@ -10,9 +10,11 @@ function AuthProviders({
 {
     return (
         <SessionProvider>
+            
         {
             children
         }
+
         </SessionProvider>
     )
     
