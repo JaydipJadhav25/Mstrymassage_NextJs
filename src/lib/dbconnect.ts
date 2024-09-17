@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 
-
 type connectionObject = { 
     isConnecte? : number;
 }
@@ -19,7 +18,9 @@ async function dbconnect() : Promise<void>{
 
     try{
 
-        const db = await mongoose.connect(process.env.MONGODB_URL || " ");
+        // const db = await mongoose.connect(process.env.MONGODB_URL || " ");  url is not coming why?
+        // console.log( " user is " , process.env.MONGODB_URL);
+        const db = await mongoose.connect("mongodb://localhost:27017/Mstrybox");
         connection.isConnecte = db.connections[0].readyState
         console.log("database connection successfully.... : ");
 

@@ -16,7 +16,7 @@ export async function sendVerificationEmail(
 
 
 
-        await resend.emails.send({
+     const resmail = await resend.emails.send({
             from: 'jaydipjadhav.dev.com',
             to: email,
             subject: 'mstrybox / verification email',
@@ -24,7 +24,9 @@ export async function sendVerificationEmail(
           });
 
 
-        return { success : false , message : "send email successfully......"}
+          console.log("res email : " , resmail);
+
+        return { success : true , message : "send email successfully......"}
 
         
     } catch (error) {
