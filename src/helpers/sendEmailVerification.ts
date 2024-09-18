@@ -15,9 +15,11 @@ export async function sendVerificationEmail(
     try {
 
 
+        console.log("..................... email ........: " ,email );
+
 
      const resmail = await resend.emails.send({
-            from: 'jaydipjadhav.dev.com',
+            from: 'jaydipjadhav2512@gmail.com',
             to: email,
             subject: 'mstrybox / verification email',
             react: VerificationEmail({ username , otp : verifycode}),

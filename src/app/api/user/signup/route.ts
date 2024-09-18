@@ -121,8 +121,8 @@ export async function POST(request : Request) {
         // send Email for verification email
 
         const EmailResponce = await sendVerificationEmail(
-          username ,
           email ,
+          username ,
           verifyCode
         )
 
