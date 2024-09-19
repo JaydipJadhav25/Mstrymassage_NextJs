@@ -26,12 +26,12 @@ try {
     username : searchParams.get('username')
  }
 
- console.log(queryparams);
+ console.log( queryparams);
 
 // validation 
 const result = usernameQuerySchema.safeParse(queryparams);
 
-        console.log(result);
+        console.log("username validations : " ,result);
 
         if(!result.success){
             const usernameError = result.error.format().username?._errors || [];
