@@ -40,8 +40,8 @@ console.log( " path  : "  , url);
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    'sign-in',
-    'sign-up',
+    '/sign-in',
+    '/sign-up',
     '/',
     '/dashbord/:path*',
     'verify/:path*',

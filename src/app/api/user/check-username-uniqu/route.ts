@@ -39,8 +39,8 @@ const result = usernameQuerySchema.safeParse(queryparams);
 
             return Response.json({
                 success : false,
-                massage  : "username is invalide",
-                usernameError
+                message  :  usernameError,
+               
             } , {
                 status : 404
             })
@@ -54,13 +54,13 @@ const result = usernameQuerySchema.safeParse(queryparams);
             username , isverifyfied : true
         })
 
-        console.log("existingVerifiedUser : " , existingVerifiedUser);
+        // console.log("existingVerifiedUser : " , existingVerifiedUser);
 
         if(existingVerifiedUser){
 
             return Response.json({
                 success : false,
-                massage  : "username is already taken",
+                message  : "username is already taken",
               
             } , {
                 status : 404
@@ -71,7 +71,7 @@ const result = usernameQuerySchema.safeParse(queryparams);
 
         return Response.json({
             success : true,
-            massage  : "username is uniqe",
+            message  : "Username is unique",
       
         } , {
             status : 202
