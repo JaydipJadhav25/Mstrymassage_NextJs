@@ -8,11 +8,6 @@ import { z} from "zod"
 })
 
 
-
-
-
-
-
 export async function POST(request : Request){
 
 await dbconnect();
@@ -43,7 +38,7 @@ const codeError = result.error?.format().code?._errors
          
             return Response.json({
                 success : false,
-                massage  : "invalide code error" ,
+                message  : "invalide code error" ,
                 codeError
              
             } , {
@@ -64,12 +59,29 @@ const codeError = result.error?.format().code?._errors
 
         return Response.json({
             success : false,
-            massage  : "user is not found , check your username",
+            message  : "user is not found , check your username",
          
         } , {
             status : 404
         })
     }
+
+       
+    if(existingUserByUsername && existingUserByUsername.isverifyfied){
+
+        return Response.json({
+            success : false,
+            message  : "user is allready verified...",
+            allreadyVerify : true
+         
+        } , {
+            status : 404
+        })
+
+
+    }
+
+
 
     //check token
 
@@ -86,7 +98,7 @@ const codeError = result.error?.format().code?._errors
         //return res
         return Response.json({
             success : true,
-            massage  : "account verified successfully.......",
+            message  : "account verified successfully.......",
          
         } , {
             status : 202
@@ -95,7 +107,7 @@ const codeError = result.error?.format().code?._errors
 
         return Response.json({
             success : false,
-            massage  : "account verified code has expired. try again.....",
+            message  : "account verified code has expired. try again.....",
          
         } , {
             status : 402
@@ -104,7 +116,7 @@ const codeError = result.error?.format().code?._errors
     }else{
         return Response.json({
             success : false,
-            massage  : "account verified code is wrong.. try again",
+            message  : "account verified code is wrong.. try again",
          
         } , {
             status : 402

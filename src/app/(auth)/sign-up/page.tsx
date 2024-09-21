@@ -103,7 +103,7 @@ const onSubmite = async(data : z.infer<typeof signupSchema>) =>{
     })
 
     //redirect user
-    router.replace(`/api/user/verify/${username}`)
+    router.replace(`/verify/${username}`)
 
     //done
     setIsSubmiting(false);

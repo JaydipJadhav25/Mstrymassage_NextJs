@@ -133,7 +133,7 @@ export async function POST(request : Request) {
           return Response.json(
             {
             success : false ,
-            massage :EmailResponce.message,
+            message :EmailResponce.message,
             },
             {
               status : 402 
@@ -149,7 +149,7 @@ export async function POST(request : Request) {
             {
             success : true ,
 
-            massage : " user registring successfully...",
+            message : " user registring successfully...",
         
             },
             {
