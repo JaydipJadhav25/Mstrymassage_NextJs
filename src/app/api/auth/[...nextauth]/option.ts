@@ -15,8 +15,11 @@ providers :[
             password: { label :  "password" , type :  "password"}
 
          } ,
+    
          async authorize(credentials: any) :Promise<any>{
+
             await dbconnect();
+
             try {
                 //user email find
              const user =    await userModel.findOne({
@@ -27,12 +30,19 @@ providers :[
                 });
 
             if(!user){
-                throw new Error("user not fount this email");
+
+                throw new Error("user not fount this email of Username");
+
             }    
 
+
+            console.log("user in auth :",  user);
+
             // check user is verified or not
-            if(user.isverifyfied){
+            if(!user.isverifyfied){
+
                 throw new Error(" user is not verifired befor login verified your account first");
+                
             } 
 
             //check password
@@ -50,7 +60,7 @@ providers :[
 
 
 
-            } catch (error: any) {
+            } catch (error) {
                 throw new Error(error);
             }
          }
@@ -67,6 +77,8 @@ callbacks : {
         token.username = user.username
     }
 
+
+    console.log("token done : " ,token)
 
         return token
     },
@@ -92,6 +104,6 @@ session : {
     strategy : "jwt"
 },
 
-secret : "jaydipjadhav@132"
+secret : "jaydipjadhav@132",
     
 }

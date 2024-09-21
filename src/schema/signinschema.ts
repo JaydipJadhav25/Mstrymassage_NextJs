@@ -4,7 +4,7 @@ export const signinSchema = z.object({
     
    
 
-     identifire : z.string(),
+     identifier : z.string(),
      password : z.string()
 
 })
