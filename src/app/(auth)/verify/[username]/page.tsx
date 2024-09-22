@@ -8,8 +8,9 @@ import { verifySchema } from '@/schema/verifyschema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import axios, { AxiosError } from 'axios';
+import { Loader2 } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm   } from 'react-hook-form';
 import * as z from "zod"
 
@@ -22,6 +23,14 @@ import * as z from "zod"
 
 
 export default function Page() {
+
+
+  const[ isverifying , setIsVerifying] = useState(false);
+
+
+
+
+
     const route = useRouter();
     // console.log("router : ", route);
     //data take in params
@@ -40,6 +49,7 @@ export default function Page() {
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
 
     console.log("data  : " , data);
+    setIsVerifying(true);
 
     try {
 
@@ -69,12 +79,16 @@ export default function Page() {
         const exiosError = error as AxiosError<AxiosError>;
         console.log( "exiosError  :" , exiosError );
     
-        // if(exiosError.response?.data?.allreadyVerify){
-        //     return route.replace("/sign-in")
-        // }
+      
 
 
-     const errorMessage = exiosError.response?.data.message
+     const errorMessage = exiosError.response?.data.message;
+     
+
+     if(errorMessage === "user is allready verified..."){
+      setIsVerifying(false);
+      route.replace("/sign-in");
+     }
     
      toast({
       title : "verification failed..",
@@ -112,7 +126,18 @@ export default function Page() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Verify</Button>
+
+            <Button type="submit">
+
+              {isverifying ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Verifying Account
+                </>
+              ) : (
+                'verify'
+              )}
+             </Button>
           </form>
 
       </Form>
