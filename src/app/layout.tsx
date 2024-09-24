@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProviders from "@/context/AuthProvider";
 import { Toaster } from "@/components/ui/toaster"
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 
 
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Navbar/>
         {children}
       <Toaster />
+      <Footer/>
       </body>
     </AuthProviders>
     </html>

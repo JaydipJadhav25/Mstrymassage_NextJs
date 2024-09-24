@@ -66,7 +66,7 @@ export async function POST(request : Request){
 
         return Response.json({
           success : true,
-          massage  : user[0].messages,
+          messages  : user[0].messages,
          
         
       } , {
