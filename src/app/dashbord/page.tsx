@@ -18,6 +18,10 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 
+import Link from 'next/link';
+
+
+
 export default function Page() {
   const[messages , setMessages] = useState<Messageinterface[]>([]);
   const[loading , setLoading] = useState(false);
@@ -214,12 +218,17 @@ toast({
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
         <div className="flex items-center">
+
+       
           <input
             type="text"
             value={profileURL }
             disabled
             className="input input-bordered w-full p-2 mr-2"
           />
+          <Link href={profileURL}>Click Here!</Link>
+          
+
           <Button onClick={ copyToClipboard }>Copy</Button>
         </div>
       </div>
