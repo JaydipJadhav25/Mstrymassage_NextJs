@@ -7,7 +7,7 @@ import { apiresponse } from '@/types/apiresponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import {z} from "zod"
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -15,17 +15,41 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Textarea } from "@/components/ui/textarea"
-
-
+import messages from "@/Messages.json"
+import Link from 'next/link';
 
 export default function Page() {
   const userName = useParams<{username : string}>();
   console.log("username : " , userName);
 
-  // const[message , setmessage] = useState('');
+  const[message , setmessage] = useState('');
   const[loading , setloading] = useState(false);
 
   const {toast} = useToast();
+  const router = useRouter();
+
+
+  // const [message, setMessage] = useState({ content: 'Click me!', title: '' });
+
+console.log("message : " , message);
+
+
+const form = useForm<z.infer<typeof messageSchema >>({
+  resolver : zodResolver(messageSchema)
+})
+
+
+
+const Content = form.watch('content');
+
+  const handleClickOnMessage = (content) => {
+    setmessage(content);
+    form.setValue('content' , content);
+    console.log("Clicked message content:", content); // Access the clicked message content
+  };
+
+
+
 
 //   useEffect(()=>{
 
@@ -77,10 +101,7 @@ export default function Page() {
 
 //   },[username]);
 
-  const form = useForm<z.infer<typeof messageSchema >>({
-    resolver : zodResolver(messageSchema)
-  })
-
+ 
 
   // to send message 
 
@@ -110,7 +131,7 @@ console.log(usermessage);
     })
    
 
-
+router.refresh();
 
 
 
@@ -141,8 +162,8 @@ console.log("error  :" , exiosError);
 // flex justify-center items-center
   return (
    <>
-     <div className="min-h-screen bg-gray-800 flex justify-center items-center">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+     <div className="min-h-screen flex justify-center">
+      <div className="w-full max-w-md p-8 space-y-8">
       {/* <div className="w-full max-w-md p-8 space-y-8 bg-whites"> */}
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
@@ -187,12 +208,33 @@ sending
   )
 }
   </Button>
-            </form>
+    </form>
 
 
           </Form>
+<hr />
+     <b>Suggested Messages </b>
 
+{
+      messages.map((message) =>(
+        <>
+
+<div onClick={() => handleClickOnMessage(message.content)} style={{ cursor: 'pointer', padding: '10px', border: '1px solid black' }}>
+        {message.content}
+
+      </div>
+
+        </>
+
+      ))
+    }
+
+<hr />
+ <Link href="/dashbord"><Button>Dashbord</Button></Link>
  </div>
+  
+
+
  </div>
    </>
   )
