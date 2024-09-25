@@ -16,7 +16,7 @@ export async function POST(request : Request){
       //user access in session
       const user :User = session?.user  as User;
 
-     console.log("user  : " , user);
+    //  console.log("user  : " , user);
 
 
       if(!session || !session.user){
@@ -32,7 +32,7 @@ export async function POST(request : Request){
       //id convert into mongodb obj id
       const userId = new mongoose.Types.ObjectId(user._id);
 
-      console.log(userId);
+      console.log( " userId  " , userId);
 
 
       try {
@@ -48,10 +48,11 @@ export async function POST(request : Request){
       
         ])
 
+console.log("user Messages : " , !user);
 
 
+        if(!user || user.length == 0 ){
 
-        if(!user || user.length === 0 ){
 
           return Response.json({
             success : false,
@@ -66,7 +67,7 @@ export async function POST(request : Request){
 
         return Response.json({
           success : true,
-          messages  : user[0].messages,
+          messages : user[0].messages,
          
         
       } , {

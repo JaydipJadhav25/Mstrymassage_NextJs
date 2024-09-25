@@ -18,7 +18,7 @@ export async function POST(request : Request){
       if(!session || !session.user){
         return Response.json({
             success : false,
-            massage  : "User is not Authenticated" ,
+            message  : "User is not Authenticated" ,
           
         } , {
             status : 404
@@ -28,7 +28,7 @@ export async function POST(request : Request){
       const userId = user._id;
 
       // take flage true or false 
-      const { accaptMessage} = await request.json();
+      const { accaptMessage } = await request.json();
 
       console.log(accaptMessage);
 
@@ -48,7 +48,7 @@ export async function POST(request : Request){
         if(!updateUser){
             return Response.json({
                 success : false,
-                massage  : "accapt-message status update user failed" ,
+                message  : "User is not Accept messages" ,
               
             } , {
                 status : 404
@@ -57,7 +57,7 @@ export async function POST(request : Request){
 
         return Response.json({
             success : true,
-            massage  : "Message accepting update successfully....." ,
+            message  : "Message accepting update successfully....." ,
           
         } , {
             status : 200
@@ -66,7 +66,7 @@ export async function POST(request : Request){
       } catch (error) {
         return Response.json({
             success : false,
-            massage  : "accapt-message user error" ,
+            message  : "accapt-message user error" ,
           
         } , {
             status : 404
@@ -96,7 +96,7 @@ export async function GET(request : Request){
       if(!session || !session.user){
         return Response.json({
             success : false,
-            massage  : "User is not Authenticated" ,
+            message  : "User is not Authenticated" ,
           
         } , {
             status : 404
@@ -112,7 +112,7 @@ export async function GET(request : Request){
         if(!foundUser){
             return Response.json({
                 success : false,
-                massage  : "User is Not Found...." ,
+                message  : "User is Not Found...." ,
 
             } , {
                 status : 404
@@ -120,20 +120,22 @@ export async function GET(request : Request){
         }
 
 
+        
         return Response.json({
+
             success : true,
-            massage  : "get user message accepting status.." ,
+            message  : "get user message accepting status.." ,
             isAcceptingMessage : foundUser.isAcceptingMassage
       
         } , {
-            status : 404
+            status : 200
         })
         
       } catch (error) {
 
         return Response.json({
             success : false,
-            massage  : "user message accepting message get flage error",
+            message  : "user message accepting message get flage error",
             error ,
           
         } , {

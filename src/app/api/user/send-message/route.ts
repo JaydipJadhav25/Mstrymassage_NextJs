@@ -19,7 +19,8 @@ export async function POST(request :Request){
 
     //filed
 
-    const{username , content} = await request.json();
+    const{ username , content } = await request.json();
+
    console.log(username , content);
 
   const correctContent =  await messageSchema.safeParse({content});
@@ -48,7 +49,7 @@ export async function POST(request :Request){
          if(!user){
              return Response.json({
                  success : false,
-                 massage  : "user is not found.........",
+                 message  : "user is not found.........",
              
              
              } , {
@@ -61,7 +62,7 @@ export async function POST(request :Request){
          if(!user.isAcceptingMassage){
             return Response.json({
                 success : false,
-                massage  : "user is not accapting messages...",
+                message  : "user is not accapting messages...",
                
               
             } , {
@@ -82,7 +83,7 @@ export async function POST(request :Request){
 
          return Response.json({
             success : true,
-            massage  : "Send Messages successfully....",
+            message  : "Send Messages successfully....",
            
           
         } , {
@@ -94,7 +95,7 @@ export async function POST(request :Request){
 
     return Response.json({
         success : false,
-        massage  : "Send Messages error......",
+        message  : "Send Messages error......",
         err : error.message
        
       

@@ -10,7 +10,7 @@ function Navbar() {
   const { data: session } = useSession();
   const user : User = session?.user as User;
 
-  console.log("session user  :" , user);
+  // console.log("session user  :" , user);
 
   return (
     <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
